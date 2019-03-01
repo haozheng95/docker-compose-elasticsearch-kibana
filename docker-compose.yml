@@ -1,7 +1,7 @@
-version: '3.6'
+version: "3.6"
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.0
+    image: elasticsearch:6.6.1
     container_name: elasticsearch
     environment:
       - node.name=es01
@@ -26,10 +26,10 @@ services:
     volumes:
       - esdata1:/usr/share/elasticsearch/data
     ports:
-      - 9200:9200
-      - 9300:9300
+      - 9201:9200
+      - 9301:9300
   elasticsearch2:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.0
+    image: elasticsearch:6.6.1
     container_name: elasticsearch2
     environment:
       - node.name=es02
@@ -55,7 +55,7 @@ services:
     volumes:
       - esdata2:/usr/share/elasticsearch/data
   elasticsearch3:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.0
+    image: elasticsearch:6.6.1
     container_name: elasticsearch3
     environment:
       - node.name=es03
@@ -81,13 +81,13 @@ services:
     volumes:
       - esdata3:/usr/share/elasticsearch/data
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:6.5.0
+    image: kibana:6.6.1
     container_name: kibana
     environment:
       SERVER_NAME: localhost
-      ELASTICSEARCH_URL: http://elasticsearch:9200/
+      ELASTICSEARCH_URL: http://elasticsearch:9201/
     ports:
-      - 5601:5601
+      - 5602:5601
     ulimits:
       nproc: 65535
       memlock:
@@ -105,9 +105,9 @@ services:
   nginx:
     image: nginx:latest
     ports:
-        - 8080:80
+      - 8081:80
     volumes:
-        - ${PWD}/nginx-config/:/etc/nginx/conf.d/
+      - ${PWD}/nginx-config/:/etc/nginx/conf.d/
     command: /bin/bash -c "nginx -g 'daemon off;'"
     ulimits:
       nproc: 65535
