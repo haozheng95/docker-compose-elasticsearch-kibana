@@ -85,7 +85,7 @@ services:
     container_name: kibana
     environment:
       SERVER_NAME: localhost
-      ELASTICSEARCH_URL: http://elasticsearch:9201/
+      ELASTICSEARCH_URL: http://elasticsearch:9200
     ports:
       - 5602:5601
     ulimits:
